@@ -10,6 +10,7 @@ function openProductModal(product) {
   url.searchParams.set("product", product.id);
   window.history.pushState({}, "", url);
 
+ 
 
   document.getElementById("modalImage").src = product.image;
   document.getElementById("modalName").textContent = product.name;
@@ -86,9 +87,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 function copyProductLink(link) {
-  navigator.clipboard.writeText(link).then(() => {
-    showCopiedToast(); // popup kecil 0.7 detik
-  });
+  // fallback aman
+  const tempInput = document.createElement("input");
+  tempInput.value = link;
+  document.body.appendChild(tempInput);
+  tempInput.select();
+  tempInput.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(tempInput);
+
+  showCopyToast("Link produk berhasil disalin");
+}
+
+function showCopyToast(text) {
+  const toast = document.createElement("div");
+  toast.className = "copy-toast";
+  toast.innerText = text;
+
+  document.body.appendChild(toast);
+
+  setTimeout(() => toast.classList.add("show"), 10);
+  setTimeout(() => {
+    toast.classList.remove("show");
+    setTimeout(() => toast.remove(), 300);
+  }, 1200);
 }
 
 
