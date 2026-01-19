@@ -711,21 +711,21 @@ body {
 
 .desc-box {
   position: relative;
-  margin: 8px 0;
+  margin: 2px 0;
   
 }
 
 .desc-box h4 {
   position: relative;
   top: 110px;
-  left: -160px;
+  left: -190px;
   font-size: 8px;
 }
 
 .desc-box p {
   position: relative;
   top: 110px;
-  left: -160px;
+  left: -190px;
   object-fit: contain;
 
 
@@ -782,16 +782,37 @@ body {
 }
 
 .checkout-btn {
-  width: 100%;
+  position: relative;
+  width: 122%;
   background: #009688;
   color: #fff;
   border: none;
   border-radius: 12px;
-  padding: 12px;
-  font-size: 10px;
+  font-size: 8px;
   cursor: pointer;
+  top: -60px;
+  left: -2px;
 }
 
+.btn-copy {
+  width: 110%;
+  margin-top: 8px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid var(--tosca);
+  background: white;
+  color: var(--tosca);
+  font-weight: 600;
+  position: relative;
+  top: -90px;
+  left: 10px;
+
+}
+
+.checkout-btn,
+.btn-copy {
+  transform: scale(0.55);
+}
 /* ================= CART MODAL CONTAINER ================= */
 .overlay.hidden {
   display: none;

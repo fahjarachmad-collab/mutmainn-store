@@ -75,3 +75,10 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+function copyProductLink() {
+  const url = window.location.href;
+
+  navigator.clipboard.writeText(url).then(() => {
+    showToast("Tautan produk berhasil disalin");
+  });
+}
