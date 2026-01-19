@@ -89,13 +89,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 function copyProductLink() {
-  if (!selectedProduct) return;
+  if (!selectedProduct || !selectedProduct.slug) return;
 
   const link =
     window.location.origin +
-    "/p/" +
-    selectedProduct.slug +
-    ".html";
+    "/?product=" +
+    selectedProduct.slug;
 
   const temp = document.createElement("input");
   temp.value = link;
@@ -106,7 +105,6 @@ function copyProductLink() {
 
   showCopyToast("Link produk berhasil disalin");
 }
-
 
 function showCopyToast(text) {
   const toast = document.createElement("div");
