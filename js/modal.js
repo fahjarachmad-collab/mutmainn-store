@@ -75,10 +75,24 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-function copyProductLink() {
-  const url = window.location.href;
-
-  navigator.clipboard.writeText(url).then(() => {
-    showToast("Tautan produk berhasil disalin");
-  });
+function copyProductLink(link) {
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(link)
+      .then(() => alert("Link berhasil disalin"))
+      .catch(() => fallbackCopy(link));
+  } else {
+    fallbackCopy(link);
+  }
 }
+
+function fallbackCopy(link) {
+  const tempInput = document.createElement("input");
+  tempInput.value = link;
+  document.body.appendChild(tempInput);
+  tempInput.select();
+  document.execCommand("copy");
+  document.body.removeChild(tempInput);
+
+  alert("Link berhasil disalin");
+}
+
