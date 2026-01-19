@@ -5,6 +5,15 @@ function openProductModal(product) {
   selectedProduct = product;
   qty = 1;
 
+   // update URL
+  const url = new URL(window.location);
+  url.searchParams.set("product", product.id);
+  window.history.pushState({}, "", url);
+
+  // tampilkan modal seperti biasa
+  renderProductModal(product);
+  modal.classList.add("show");
+
   document.getElementById("modalImage").src = product.image;
   document.getElementById("modalName").textContent = product.name;
   document.getElementById("modalPrice").textContent =
@@ -28,6 +37,10 @@ function openProductModal(product) {
 /* ================= CLOSE ================= */
 function closeModal() {
   document.getElementById("productModal").classList.add("hidden");
+  modal.classList.remove("show");
+  const url = new URL(window.location);
+  url.searchParams.delete("product");
+  window.history.pushState({}, "", url);
 }
 
 /* ================= QTY ================= */
@@ -76,23 +89,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 function copyProductLink(link) {
-  if (navigator.clipboard && window.isSecureContext) {
-    navigator.clipboard.writeText(link)
-      .then(() => alert("Link berhasil disalin"))
-      .catch(() => fallbackCopy(link));
-  } else {
-    fallbackCopy(link);
+  navigator.clipboard.writeText(link).then(() => {
+    showCopiedToast(); // popup kecil 0.7 detik
+  });
+}
+
+
+window.addEventListener("DOMContentLoaded", () => {
+  const params = new URLSearchParams(window.location.search);
+  const productId = params.get("product");
+
+  if (productId) {
+    const product = products.find(p => p.id === productId);
+    if (product) {
+      openProductModal(product);
+    }
   }
-}
-
-function fallbackCopy(link) {
-  const tempInput = document.createElement("input");
-  tempInput.value = link;
-  document.body.appendChild(tempInput);
-  tempInput.select();
-  document.execCommand("copy");
-  document.body.removeChild(tempInput);
-
-  alert("Link berhasil disalin");
-}
-
+});
