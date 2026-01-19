@@ -34,8 +34,10 @@ function openProductModal(product) {
 
 /* ================= CLOSE ================= */
 function closeModal() {
-  document.getElementById("productModal").classList.add("hidden");
+  const modal = document.getElementById("productModal");
+  modal.classList.add("hidden");
   modal.classList.remove("show");
+
   const url = new URL(window.location);
   url.searchParams.delete("product");
   window.history.pushState({}, "", url);
