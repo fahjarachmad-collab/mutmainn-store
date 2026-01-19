@@ -89,26 +89,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 function copyProductLink() {
-  if (!selectedProduct || !selectedProduct.slug) {
-    console.warn("Produk belum siap untuk dicopy");
-    return;
-  }
+  if (!selectedProduct) return;
 
   const link =
     window.location.origin +
-    "/share.html?slug=" + selectedProduct.slug
+    "/p/" +
+    selectedProduct.slug +
+    ".html";
 
-  // fallback paling aman (support mobile & browser lama)
-  const tempInput = document.createElement("input");
-  tempInput.value = link;
-  document.body.appendChild(tempInput);
-  tempInput.select();
-  tempInput.setSelectionRange(0, 99999);
+  const temp = document.createElement("input");
+  temp.value = link;
+  document.body.appendChild(temp);
+  temp.select();
   document.execCommand("copy");
-  document.body.removeChild(tempInput);
+  document.body.removeChild(temp);
 
   showCopyToast("Link produk berhasil disalin");
 }
+
 
 function showCopyToast(text) {
   const toast = document.createElement("div");

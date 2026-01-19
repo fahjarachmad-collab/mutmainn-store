@@ -795,17 +795,22 @@ body {
 }
 
 .btn-copy {
-  width: 110%;
+  width: 45%;
+  height: 9%;
   margin-top: 8px;
-  padding: 10px;
+  padding: 1px;
   border-radius: 10px;
   border: 1px solid var(--tosca);
   background: white;
   color: var(--tosca);
-  font-weight: 600;
+  font-weight: 300;
+  text-justify: center;
+  text-align: center;
+  
+
   position: relative;
-  top: -90px;
-  left: 10px;
+  top: -82.1px;
+  left: 125px;
 
 }
 
@@ -1009,6 +1014,10 @@ body {
 
 
 .checkout-btn {
+  position: relative;
+  top: -20px;
+  left: -40px;
+
   margin: 12px 12px 12px 0px;
   padding: 14px;
   border-radius: 10px;
