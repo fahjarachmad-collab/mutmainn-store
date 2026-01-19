@@ -10,9 +10,6 @@ function openProductModal(product) {
   url.searchParams.set("product", product.id);
   window.history.pushState({}, "", url);
 
-  // tampilkan modal seperti biasa
-  renderProductModal(product);
-  modal.classList.add("show");
 
   document.getElementById("modalImage").src = product.image;
   document.getElementById("modalName").textContent = product.name;
