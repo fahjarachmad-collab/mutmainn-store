@@ -88,8 +88,17 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-function copyProductLink(link) {
-  // fallback aman
+function copyProductLink() {
+  if (!selectedProduct || !selectedProduct.slug) {
+    console.warn("Produk belum siap untuk dicopy");
+    return;
+  }
+
+  const link =
+    window.location.origin +
+    "/share.html?slug=" + selectedProduct.slug
+
+  // fallback paling aman (support mobile & browser lama)
   const tempInput = document.createElement("input");
   tempInput.value = link;
   document.body.appendChild(tempInput);
@@ -116,14 +125,4 @@ function showCopyToast(text) {
 }
 
 
-window.addEventListener("DOMContentLoaded", () => {
-  const params = new URLSearchParams(window.location.search);
-  const productId = params.get("product");
 
-  if (productId) {
-    const product = products.find(p => p.id === productId);
-    if (product) {
-      openProductModal(product);
-    }
-  }
-});

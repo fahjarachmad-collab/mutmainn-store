@@ -117,5 +117,16 @@ function checkout() {
 
   // Update badge otomatis sudah ada di addToCart
 
+window.addEventListener("DOMContentLoaded", () => {
+  const params = new URLSearchParams(window.location.search);
+  const slug = params.get("product");
+
+  if (!slug) return;
+
+  const product = products.find(p => p.slug === slug);
+  if (product) {
+    openProductModal(product);
+  }
+});
 
 
